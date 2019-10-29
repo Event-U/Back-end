@@ -1,0 +1,24 @@
+{
+    "name": "eventuloginapi",
+    "version": "1.0.0",
+    "description": "First Try for the login API for Event-u ",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "start": "node index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "cors": "^2.8.5",
+        "dotenv": "^8.1.0",
+        "express": "^4.17.1",
+        "joi": "^13.1.0",
+        "jsonwebtoken": "^8.5.1",
+        "jws": "^3.2.2",
+        "mongoose": "^5.7.1",
+        "nodemon": "^1.19.2",
+        "stripe": "^7.10.0"
+    }
+}

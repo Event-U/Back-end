@@ -1,0 +1,4 @@
+applications: 
+- name: api-eventu
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  memory: 64M
