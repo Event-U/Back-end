@@ -26,17 +26,14 @@ const serviceSchema = mongoose.Schema({
 	},
 	createDate: {
 		type: Date,
-		required: true,
 		default: Date.now()
 	},
 	UpdateDate: {
 		type: Date,
-		required: true,
 		default: Date.now()
 	},
 	isActive: {
 		type: Boolean,
-		required: true,
 		default: true
 	}
 })

@@ -1,16 +1,11 @@
 const Service = require('../models/service')
 
-function create({ name, description, measurementUnit, unitPrice, createDate, UpdateDate, isActive }) {
+function create({ name, description, measurementUnit, unitPrice}) {
 	return Service.create({
 		name,
 		description, 
 		measurementUnit,
-		unitPrice,
-		imagenes, 
-		createDate, 
-		UpdateDate, 
-		isActive,
-		id	
+		unitPrice
 	})
 }
 
