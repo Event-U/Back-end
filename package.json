@@ -17,7 +17,7 @@
         "joi": "^13.1.0",
         "jsonwebtoken": "^8.5.1",
         "jws": "^3.2.2",
-        "mongoose": "^5.7.1",
+        "mongoose": "^5.7.5",
         "nodemon": "^1.19.2",
         "stripe": "^7.10.0"
     }
