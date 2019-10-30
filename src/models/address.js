@@ -58,11 +58,11 @@ const addressSchema = new mongoose.Schema({
 			ref: 'User'
 		}]
 	},
-	dateCreate: {
+	createDate: {
 		type: Date,
 		required: true
 	},
-	dateUpdaate: {
+	updateDate: {
 		type: Date,
 		required: true
 	}, 

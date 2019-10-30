@@ -1,11 +1,11 @@
 const mongoose = required('mongoose')
 
 const eventSchema = new mongoose.Schema ({
-	eventDate: {
+	date: {
 		type: Date,
 		required: true
 	},
-	address: {
+	addresses: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Address'
@@ -15,9 +15,29 @@ const eventSchema = new mongoose.Schema ({
 		type: Number,
 		required: true
 	},
-	investment:{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Investement'
+	investments: {
+		type: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Investment'
+		}]
+	},
+	image: {
+		type: string,
+		required: false
+	},
+	isPay: {
+		type: Boolean,
+		default: false
+	},
+	name: {
+		type: String,
+		minlength: 10,
+		maxlength: 50
+	},
+	description: {
+		type: string,
+		minlength: 5,
+		maxlength: 200
 	},
 	createDate: {
 		type: Date,

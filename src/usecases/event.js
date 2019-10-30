@@ -1,12 +1,17 @@
 const Event = require('../models/event')
 
-function create ({eventDate, address, organizator, investment, createDate, updateDate }) {
-	eventDate, 
-	address, 
+function create ({date, addresses, organizator, investment, image, isPay, name, description, createDate, updateDate, isActive }) {
+	date, 
+	addresses, 
 	organizator, 
-	investment, 
+	investments, 
+	image,
+	isPay,
+	name,
+	description,
 	createDate, 
-	updateDate
+	updateDate,
+	isActive
 }
 
 function getAll() {

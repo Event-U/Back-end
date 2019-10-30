@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const companyBussinesSchema = mongoose.Schema ({
+const companyBussineSchema = mongoose.Schema ({
 	name: {
 		type: String,
 		minlength: 5,
@@ -9,11 +9,13 @@ const companyBussinesSchema = mongoose.Schema ({
 	},
 	createDate: {
 		type: Date,
-		required: true
+		required: true,
+		default: Date.now()  
 	},
-	createUpdate: {
+	updateDate: {
 		type: Date,
-		requerid: true
+		requerid: true,
+		default: Date.now()  
 	}, 
 	isActive: {
 		type: Boolean,
@@ -22,4 +24,4 @@ const companyBussinesSchema = mongoose.Schema ({
 	}
 })
 
-module.export = mongoose.model('CompanyBussines', companyBussinesSchema)
+module.exports = mongoose.model('companyBussine', companyBussineSchema)

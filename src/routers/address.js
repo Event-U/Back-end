@@ -1,16 +1,17 @@
 const express = require('express')
-const User = require('../usecases/user')
+
+const address = require('../usecases/address')
 
 const router = express.Router()
 
 router.get('/', async(req, res) => {
 	try {
-		const allUsers = await User.getAll()
+		const allAddress = await address.getAll()
 		res.json({
 			success: true,
-			message: 'All Users',
+			message: 'All address',
 			data: {
-				Users: allUsers
+				address: allAddress
 			}
 		})	
 	} catch (error) {
@@ -24,12 +25,12 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
-		const UserFound = await User.getById(id)
+		const addressFound = await address.getById(id)
 		res.json({
 			success: true,
-			message: 'User ${id} encontrado',
+			message: 'Address ${id} found',
 			data: {
-			  user: UserFound
+			  address: addressFound
 			}
 		})
 	}catch (error) {
@@ -41,16 +42,15 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
-
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createUser = await User.create(data)
+		const createAddress = await address.create(data)
 		res.json({
 			success: true,
-			message: 'Created user',
+			message: 'Created address',
 			data: {
-				user: createUser
+				address: createAddress
 			}
 		})
 	} catch (error) {
@@ -65,17 +65,12 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		console.log('Entra al patch')
-
-		const { id } = req.params
-		const { body } = req.body
-		const UserUpdate = await user.updateById(id, body)
-
-		console.log (body)
-		Response.json ({
+		const AddressUpdate = await user.updateById(id, data)
+		res.json ({
 			success: true,
-			message: 'User ${id} update',
+			message: 'Address ${id} update',
 			data: {
-				user: UserUpdate
+				address: AddressUpdate
 			}
 		})
 	} catch (error) {
@@ -89,14 +84,13 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async(req, res) => {
 	try{
-		const { id } = req.params
-		const deleteUser = await User.findByIdAndUpdate(id, 
+		const deleteAddress = await address.findByIdAndUpdate(id, 
 				{isActive: false, updateDate: Date.now()})
 		res.json({
 			success: true,
-			message: 'Deleted users',
+			message: 'Deleted address',
 			data: {
-				user: deleteUser
+				address: deleteAddress
 			}
 		})
 	} catch (error) {

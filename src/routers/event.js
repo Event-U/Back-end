@@ -1,24 +1,23 @@
 const express = require('express')
-const Need = require('../usecases/need')
+const event = require('../usecases/event')
 
 const router = express.Router()
 
-
 router.get('/', async(req, res) => {
-	try{
-		const allNeed = await Need.getAll()
+	try {
+		const allEvents = await event.getAll()
 		res.json({
-			succes: true,
-			message: 'All Need',
+			success: true,
+			message: 'All events',
 			data: {
-				Need: allNeed
+				events: allEvents
 			}
-		})
+		})	
 	} catch (error) {
 		res.json({
-			succes: false,
+			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
@@ -26,17 +25,17 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try {
 		const { id } = req.params
-		const NeedFound = await Need.getById()
-			res.jason({
-				succes: true,
-				message: 'Need Found',
-				data: {
-					Need: NeedFound
-				}
-			})
-	}	catch (error) {
+		const eventFound = await event.getById
 		res.json({
-			succes: false,
+			success: true,
+			message: 'event found',
+			data: {
+			  event: eventFound
+			}
+		})
+	}catch (error) {
+		res.json({
+			success: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
@@ -46,17 +45,18 @@ router.get('/:id', async(req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteNeed = await Need.delete(id)
+		const deleteEvent = await event.findByIdAndUpdaate(id, 
+				{isActive: false, updateDate: Date.now()})
 		res.json({
-			succes: true,
-			message: 'Deleted need',
+			success: true,
+			message: 'Deleted event',
 			data: {
-				Need: deleteNeed
+				event: deletEevent
 			}
 		})
 	} catch (error) {
 		res.json({
-			succes: false,
+			success: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
@@ -66,18 +66,17 @@ router.delete('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createNeed = await Need.create(data)
-
-		console.log(createNeed)
-
+		const createEvent = await event.create(data)
 		res.json({
-			succes: true,
-			message: 'Created Need',
-			Need: createNeed
+			success: true,
+			message: 'Created event',
+			data: {
+				event: createEvent
+			}
 		})
 	} catch (error) {
 		res.json({
-			succes: false,
+			success: false,
 			message: 'Something went wrong',
 			error: error
 		})

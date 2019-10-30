@@ -1,10 +1,10 @@
 const CompanyBussine = require('../models/companyBussine')
 
-function create({name, createDate, createUpdate, isActive}) {
+function create({name, createDate, updateDate, isActive}) {
 	return CompanyBussine.create({
 		name, 
 		createDate, 
-		createUpdate, 
+		updateDate, 
 		isActive
 	})
 }
@@ -14,16 +14,21 @@ function getAll() {
 }
 
 function getById(id) {
-	return CompanyBussine.find(id)
+	return CompanyBussine.findById(id)
+}
+
+function updateById (id, newData) {
+	return CompanyBussine.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
-	return CompanyBussine.findByAndDelete(id, { updateDate: now, isActive: false })
+	return CompanyBussine.findByIdAndUpdate(id, { udateDate: now, isActive: false })
 }
 
 module.exports = {
 	create,
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

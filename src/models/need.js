@@ -33,10 +33,11 @@ const needSchema = mongoose.Schema ({
 		type: Date,
 		required: true
 	}, 
-	isActive: Boolean,
-		type: Date,
+	isActive: {
+		type: Boolean,
 		require: true,
 		default: true
+	}
 })
 
 module.exports = mongoose.model('Need', needSchema)

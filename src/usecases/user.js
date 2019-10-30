@@ -1,16 +1,15 @@
 const User = require('../models/user')
-const Service = require('../models/service')
 
-function create({isOrganizer, isProvider, isStakeHolder, services, isActiveNotification, bussinessName, rfc, companyBussines, email, password, phone, createDate, updateDate}) {
+function create({isOrganizator, isProvider, isStakeHolder, services, isActiveNotification, bussinesName, rfc, companyBussines, email, password, phone, createDate, updateDate}) {
 	return User.create({ 
-		isOrganizer,
+		isOrganizator,
     isProvider,
 		isStakeHolder,
-		idServices,
+		services,
 		isActiveNotification,
-		idBussinessName,
+		bussinesName,
 		rfc,
-		companyBussines,
+	  companyBussines,
 		email,
 		password,
 		phone,
@@ -24,12 +23,13 @@ function getAll() {
 }
 
 function getById(id) {
-	return User.findByID(id)
-	.populate('service')
+	return User.findById(id)
+//	.populate('service')
+//	.populate('companyBussines')
 }
 
 function getByIdAndServices(id) {
-	return User.findByID(id)
+	return User.findById(id)
 	.populate('service')
 }
 
@@ -38,7 +38,7 @@ function updateById (id, newData) {
 }
 
 function getServices (id) {
-	return services.findById()
+	return services.findById(id)
 }
 
 function deleteById(id) {

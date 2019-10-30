@@ -23,33 +23,12 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
-		const { id } = req.params
-		const ServiceFound = await Service.getById()
+		const ServiceFound = await Service.getById(id)
 			res.json({
 			success: true,
-			message: 'Service found',
+			message: 'Service ${id} found',
 			data: {
 				Service: ServiceFound
-			}
-		})
-	} catch (error) {
-		res.json({
-			success: false,
-			message: 'Something went wrong',
-			error: error.message
-		})
-	}
-})
-
-router.delete('/:id', async(req, res) => {
-	try{
-		const { id } = req.params
-		const deleteService = await Service.deleteUser(id)
-		res.json({
-			success: true,
-			message: 'Deleted service',
-			data: {
-				Service: deleteService
 			}
 		})
 	} catch (error) {
@@ -65,9 +44,6 @@ router.post('/', async(req, res) => {
 	try {
 		const data = req.body
 		const createService = await Service.create(data)
-
-		console.log(createService)
-
 		res.json({
 			success: true,
 			message: 'Created service',
@@ -81,5 +57,50 @@ router.post('/', async(req, res) => {
 		})
 	}
 })
+
+router.patch('/:id', async (req, res) => {
+	try{
+		const { id } = req.params
+		const { body } = req.body
+		const serviceUpdate = await service.updateById(id, body)
+
+		Response.json ({
+			success: true,
+			message: 'Service ${id} update',
+			data: {
+				service: serviceUpdate
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	} 
+})
+
+router.delete('/:id', async(req, res) => {
+	try{
+		const { id } = req.params
+		const deleteService = await Service.findByIdAndUpdate(id,
+			{isActive: false, updateDate: Date.now()})
+
+		res.json({
+			success: true,
+			message: 'Deleted service',
+			data: {
+				service: deleteService
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	}
+})
+
 
 module.exports = router
