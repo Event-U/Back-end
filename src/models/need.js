@@ -7,7 +7,11 @@ const needSchema = mongoose.Schema ({
 		maxlength: 200,
 		requerid: true
 	},
-	Services: {
+	updateDate: {
+		type: Date,
+		required: true
+	}, 
+	service: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Services'
@@ -19,7 +23,7 @@ const needSchema = mongoose.Schema ({
 			ref: 'User'
 		}]
 	},
-	Events: {
+	event: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Event'

@@ -1,14 +1,14 @@
 const Event = require('../models/event')
 
-function create ({date, addresses, organizator, investment, image, isPay, name, description, createDate, updateDate, isActive }) {
-	date, 
-	addresses, 
-	organizator, 
-	investments, 
-	image,
-	isPay,
+function create ({name, description, date, addresses, image, organizator, investments, isPay, createDate, updateDate, isActive }) {
 	name,
 	description,
+	date, 
+	addresses, 
+	image,
+	organizator, 
+	investments, 
+	isPay,
 	createDate, 
 	updateDate,
 	isActive
@@ -19,7 +19,11 @@ function getAll() {
 }
 
 function getById(id) {
-	return Event.find(id)
+	return Event.findById|(id)
+}
+
+function updateById (id, newData) {
+	return Event.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
@@ -30,5 +34,6 @@ module.export = {
 	create,
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

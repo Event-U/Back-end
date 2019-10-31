@@ -1,7 +1,7 @@
 const investment = require('../models/Investment')
 
 function create ({investorUser, amout, description, createDate, updateDate, isActive }) {
-	return Investment.create({
+	return investment.create({
 		investorUser,
 		amout, 
 		description, 
@@ -12,20 +12,25 @@ function create ({investorUser, amout, description, createDate, updateDate, isAc
 }
 
 function getAll() {
-	return Investment.find()
+	return investment.find()
 }
 
 function getById(id) {
-	return Investment.findById(id)
+	return investment.findById(id)
+}
+
+function updateById(id, newData) {
+	return investment.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
-	return investment.findByIdAndDelete(id, { updateDate: now, isActive: false })
+	return investment.findByIdAndUpdate(id, { updateDate: now, isActive: false })
 }
 
-module.export = {
+module.exports = {
 	create,
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

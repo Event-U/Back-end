@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
 			succes: true,
 			message: 'All catServices',
 			data: {
-				catServices
+				catServices: allCatService
 			}
 		})
 	} catch (error) {
@@ -25,9 +25,9 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const catServicesFound = await catServices.getAll()
+		const catServicesFound = await catServices.getById(id)
 		res.json({
-			succes: true,
+			success: true,
 			message: 'CatServices Found',
 			data: {
 				catServices: catServicesFound
@@ -35,19 +35,63 @@ router.get('/:id', async(req, res) => {
 		})
 	} catch (error) {
 		res.json({
-			succes: false,
+			success: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
 	}
 })
 
+
+router.post('/', async(req, res) => {
+	try {
+		const data = req.body
+		const createCatService = await catService.create(data)
+		res.json({
+			success: true,
+			message: 'Created catService',
+			data: {
+				catService: createCatService
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error
+		})
+	}
+})
+
+router.patch('/:id', async (req, res) => {
+	try{
+		const { id } = req.params
+		const { body } = req.body
+		const catServiceUpdate = await catService.updateById(id, body)
+
+		Response.json ({
+			success: true,
+			message: 'CatService ${id} update',
+			data: {
+				catService: catServiceUpdate
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	} 
+})
+
+
 router.delete('/id', async(req, res) => {
 	try {
 		const { id } = req.params
 		const deleteCatServices = await catServcies.delete(id)
-		res.jsson({
-			succes: true,
+		res.json({
+			success: true,
 			message: 'Delete catServices',
 			data: {
 				catServices: deleteCatServices
@@ -61,27 +105,5 @@ router.delete('/id', async(req, res) => {
 		})
 	}
 })
-
-
-router.post('/', async(req, res) => {
-	try {
-		const data = req.body
-		const createCatServices = await catServcies.create(data)
-
-		console.log(createCatServices)
-
-		res.json({
-			succes: true,
-			message: 'Created CatServices',
-			catServices: createCatServices
-		})
-	} catch (error) {
-		res.json({
-				succes: false,
-				message: 'Something went wrong',
-				error: error
-		})
-	}
- })
 
  module.exports = router

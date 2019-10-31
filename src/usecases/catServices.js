@@ -16,14 +16,18 @@ function getById(id) {
 	return catServices.findById(id)
 }
 
-function deleteById(id) {
-	return Need.FindByIdAndDelete(id, { updateDate: now, isActive: false })
+function updateById (id, newData) {
+	return catServices.findByIdAndUpdate(id, newData)
 }
 
+function deleteById(id) {
+	return catServices.FindByIdAndDelete(id, { updateDate: now, isActive: false })
+}
 
 module.exports={
 	create,
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

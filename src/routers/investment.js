@@ -1,16 +1,16 @@
 const express = require('express')
-const event = require('../usecases/event')
+const investment = require('../usecases/investment')
 
 const router = express.Router()
 
 router.get('/', async(req, res) => {
 	try {
-		const allEvents = await event.getAll()
+		const allInvestment = await investment.getAll()
 		res.json({
 			success: true,
-			message: 'All events',
+			message: 'All Investment',
 			data: {
-				events: allEvents
+				investment: allInvestment
 			}
 		})	
 	} catch (error) {
@@ -24,13 +24,12 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
-		const { id } = req.params
-		const eventFound = await event.getById(id)
+		const investmentFound = await investment.getById(id)
 		res.json({
 			success: true,
-			message: 'event found',
+			message: 'Investment ${id} encontrado',
 			data: {
-			  event: eventFound
+			  investment: investmentFound
 			}
 		})
 	}catch (error) {
@@ -45,12 +44,12 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createEvent = await event.create(data)
+		const createInvestment = await investment.create(data)
 		res.json({
 			success: true,
-			message: 'Created event',
+			message: 'Created investment',
 			data: {
-				event: createEvent
+				investment: createInvestment
 			}
 		})
 	} catch (error) {
@@ -66,13 +65,12 @@ router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
 		const { body } = req.body
-		const eventUpdate = await event.updateById(id, body)
-
-		res.json ({
+		const investmentUpdate = await investment.updateById(id, body)
+		Response.json ({
 			success: true,
-			message: 'Event ${id} update',
+			message: 'investment ${id} update',
 			data: {
-				event: eventUpdate
+				investment: investmentUpdate
 			}
 		})
 	} catch (error) {
@@ -87,13 +85,13 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteEvent = await event.findByIdAndUpdate(id, 
+		const deleteInvestment = await investment.findByIdAndUpdate(id, 
 				{isActive: false, updateDate: Date.now()})
 		res.json({
 			success: true,
-			message: 'Deleted event',
+			message: 'Deleted investment',
 			data: {
-				event: deletEevent
+				investment: deleteInvestment
 			}
 		})
 	} catch (error) {

@@ -26,9 +26,9 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try {
 		const { id } = req.params
-		const NeedFound = await Need.getById()
-			res.jason({
-				succes: true,
+		const NeedFound = await Need.getById(id)
+			res.json({
+				success: true,
 				message: 'Need Found',
 				data: {
 					Need: NeedFound
@@ -43,10 +43,50 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
+router.post('/', async(req, res) => {
+	try {
+		const data = req.body
+		const createNeed = await Need.create(data)
+		res.json({
+			success: true,
+			message: 'Created Need',
+			Need: createNeed
+		})
+	} catch (error) {
+		res.json({
+			succes: false,
+			message: 'Something went wrong',
+			error: error
+		})
+	}
+})
+
+router.patch('/:id', async (req, res) => {
+	try{
+		const { id } = req.params
+		const { body } = req.body
+		const NeedUpdate = await need.updateById(id, body)
+
+		Response.json ({
+			success: true,
+			message: 'Need ${id} update',
+			data: {
+				Need: NeedUpdate
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	} 
+})
+
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteNeed = await Need.delete(id)
+		const deleteNeed = await Need.deleteById(id)
 		res.json({
 			succes: true,
 			message: 'Deleted need',
@@ -63,25 +103,5 @@ router.delete('/:id', async(req, res) => {
 	}
 })
 
-router.post('/', async(req, res) => {
-	try {
-		const data = req.body
-		const createNeed = await Need.create(data)
-
-		console.log(createNeed)
-
-		res.json({
-			succes: true,
-			message: 'Created Need',
-			Need: createNeed
-		})
-	} catch (error) {
-		res.json({
-			succes: false,
-			message: 'Something went wrong',
-			error: error
-		})
-	}
-})
 
 module.exports = router
