@@ -9,7 +9,7 @@ router.get('/', async(req, res) => {
 			success: true,
 			message: 'All Services',
 			data: {
-				Service: allServices
+				service: allServices
 			}
 		})
 	} catch (error) {
@@ -23,12 +23,13 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
+		const {id} = req.params
 		const ServiceFound = await Service.getById(id)
 			res.json({
 			success: true,
-			message: 'Service ${id} found',
+			message: `Service ${id} found`,
 			data: {
-				Service: ServiceFound
+				service: ServiceFound
 			}
 		})
 	} catch (error) {

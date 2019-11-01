@@ -24,10 +24,12 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
+		console.log(req.params)
+		const {id} = req.params
 		const UserFound = await User.getById(id)
 		res.json({
 			success: true,
-			message: 'User ${id} encontrado',
+			message: `User ${id} encontrado`,
 			data: {
 			  user: UserFound
 			}
@@ -65,13 +67,16 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		console.log('Entra al patch')
-
+		// console.log(req.params)
+		// console.log(req.body)
+	
 		const { id } = req.params
-		const { body } = req.body
-		const UserUpdate = await user.updateById(id, body)
-
+		const body = req.body
 		console.log (body)
-		Response.json ({
+		const UserUpdate = await User.updateById(id, body)
+		console.log('llego')
+		
+		res.json({
 			success: true,
 			message: 'User ${id} update',
 			data: {

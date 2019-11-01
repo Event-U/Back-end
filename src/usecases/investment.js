@@ -1,4 +1,4 @@
-const investment = require('../models/Investment')
+const investment = require('../models/investment')
 
 function create ({investorUser, amout, description, createDate, updateDate, isActive }) {
 	return investment.create({

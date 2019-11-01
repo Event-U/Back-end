@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
 			success: true,
 			message: 'All CompanyBussine',
 			data: {
-				CompanyBussine: allCompanyBussine
+				companyBussine: allCompanyBussine
 			}
 		})	
 	} catch (error) {
@@ -28,9 +28,9 @@ router.get('/:id', async(req, res) => {
 		const CompanyBussineFound = await CompanyBussine.getById(id)
 		res.json({
 			success: true,
-			message: 'CompanyBussine ${id} found',
+			message: `CompanyBussine ${id} found`,
 			data: {
-			  CompanyBussine: CompanyBussineFound
+			  companyBussine: CompanyBussineFound
 			}
 		})
 	}catch (error) {
@@ -64,20 +64,20 @@ router.delete('/:id', async(req, res) => {
 	}
 })
 
-router.post('/', async (request, response) => {
+router.post('/', async (req, res) => {
   try {
+		const data = req.body
+    const newCompanyBussine = await CompanyBussine.create(data)
 
-    const newCompanyBussine = await CompanyBussine.create(request.body)
-
-    response.json({
+    res.json({
 			success: true,
-			message: 'CompanyBussine ${id} Creada',
+			message: `CompanyBussine ${id} Creada`,
       data: {
-        CompanyBussine: newCompanyBussine
+        companyBussine: newCompanyBussine
       }
     })
   } catch (error) {
-    response.json({
+    res.json({
       success: false,
       message: 'Something went wrong Post',
       error: error.message
@@ -89,13 +89,11 @@ router.post('/', async (request, response) => {
 
 router.patch('/:id', async (req, res) => {
 	try{
-		console.log('Entra al patch')
 
 		const { id } = req.params
-		const { body } = req.body
+		const bbody = req.body
 		const CompanyBussineUpdate = await CompanyBussine.updateById(id, body)
 
-		console.log (body)
 		Response.json ({
 			success: true,
 			message: 'CompanyBussine update',

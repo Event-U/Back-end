@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const catServicesSchema = mongoose.Schema({
+const catServicesSchema = new mongoose.Schema({
 	name: {
 		type : String,
 		minlength: 5,
@@ -15,10 +15,12 @@ const catServicesSchema = mongoose.Schema({
 	},
 	createDate: {
 		type: Date,
+		default: Date.now(),
 		required: true
 	},
 	updateDate: {
 		type: Date,
+		default: Date.now(),
 		required: true
 	}, 
 	isActive: {
@@ -28,4 +30,4 @@ const catServicesSchema = mongoose.Schema({
 	}
 })
 
-module.exports = mongoose.model('catServices')
+module.exports = mongoose.model('catServices', catServicesSchema)

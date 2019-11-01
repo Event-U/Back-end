@@ -10,7 +10,7 @@ router.get('/', async(req, res) => {
 			success: true,
 			message: 'All events',
 			data: {
-				events: allEvents
+				event: allEvents
 			}
 		})	
 	} catch (error) {
@@ -45,6 +45,8 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
+		console.log(data)
+
 		const createEvent = await event.create(data)
 		res.json({
 			success: true,
@@ -52,12 +54,12 @@ router.post('/', async(req, res) => {
 			data: {
 				event: createEvent
 			}
-		})
+		}) 
 	} catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
@@ -65,7 +67,7 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
-		const { body } = req.body
+		const body = req.body
 		const eventUpdate = await event.updateById(id, body)
 
 		res.json ({

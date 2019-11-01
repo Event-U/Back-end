@@ -48,7 +48,7 @@ const addressSchema = new mongoose.Schema({
 		required: true
 	},
 	isPhisical:{
-		type: Bloolean,
+		type: Boolean,
 		defaul: false,
 		required: true
 	},

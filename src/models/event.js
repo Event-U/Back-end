@@ -1,4 +1,4 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 
 const eventSchema = new mongoose.Schema ({
 	name: {
@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema ({
 		maxlength: 50
 	},
 	description: {
-		type: string,
+		type: String,
 		minlength: 5,
 		maxlength: 200
 	},
@@ -22,11 +22,11 @@ const eventSchema = new mongoose.Schema ({
 		}]
 	},
 	image: {
-		type: string,
+		type: String,
 		required: false
 	},
 	organizator: {
-		type: Number,
+		type: String,
 		required: true
 	},
 	investments: {
@@ -41,10 +41,12 @@ const eventSchema = new mongoose.Schema ({
 	},
 	createDate: {
 		type: Date,
+		default: Date.now(),
 		required: true
 	},
 	updateDate: {
 		type: Date,
+		default: Date.now(),
 		required: true
 	},
 	isActive: {
@@ -54,4 +56,4 @@ const eventSchema = new mongoose.Schema ({
 	}
 }) 
 
-module.exports = mongoose.model('event', eventsSchema) 
+module.exports = mongoose.model('event', eventSchema) 

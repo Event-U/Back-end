@@ -1,11 +1,13 @@
 const catServices = require('../models/catServices')
 
 function create({name, description, createDate, updateDate, isActive}) {
-	name, 
-	description, 
-	createDate, 
-	updateDate, 
-	isActive
+	return catServices.create({
+		name, 
+		description, 
+		createDate, 
+		updateDate, 
+		isActive	
+	})
 }
 
 function getAll() {
@@ -24,7 +26,7 @@ function deleteById(id) {
 	return catServices.FindByIdAndDelete(id, { updateDate: now, isActive: false })
 }
 
-module.exports={
+module.exports = {
 	create,
 	getAll,
 	getById,

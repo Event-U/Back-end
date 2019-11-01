@@ -1,5 +1,5 @@
 const express = require('express')
-const catServcies = require('../usecases/catServices')
+const catServices = require('../usecases/catServices')
 
 const router = express.Router()
 
@@ -7,15 +7,15 @@ router.get('/', async(req, res) => {
 	try{
 		const allCatServices = await catServices.getAll()
 		res.json({
-			succes: true,
+			success: true,
 			message: 'All catServices',
 			data: {
-				catServices: allCatService
+				catServices: allCatServices
 			}
 		})
 	} catch (error) {
 		res.json({
-			succes: false,
+			success: false,
 			message: 'Something went wrong',
 			error: error
 		})
@@ -46,12 +46,12 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createCatService = await catService.create(data)
+		const createCatService = await catServcies.create(data)
 		res.json({
 			success: true,
 			message: 'Created catService',
 			data: {
-				catService: createCatService
+				catServices: createCatService
 			}
 		})
 	} catch (error) {
