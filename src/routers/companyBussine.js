@@ -66,9 +66,12 @@ router.delete('/:id', async(req, res) => {
 
 router.post('/', async (req, res) => {
   try {
+		console.log('entra al post')
 		const data = req.body
+		console.log(data)
     const newCompanyBussine = await CompanyBussine.create(data)
-
+		console.log("pasa")
+		console.log(newCompanyBussine)
     res.json({
 			success: true,
 			message: `CompanyBussine ${id} Creada`,
@@ -80,7 +83,7 @@ router.post('/', async (req, res) => {
     res.json({
       success: false,
       message: 'Something went wrong Post',
-      error: error.message
+      error: error
     })
   }
 })
