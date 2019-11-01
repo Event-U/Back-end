@@ -23,11 +23,20 @@ function getAll() {
 }
 
 function getById(id) {
-	console.log(id)
 	return User.findById(id)
-//	.populate('service')
-//	.populate('companyBussines')
+	.populate('service')
+	.populate('companyBussines')
 }
+
+function getLogin(email, password) {
+	const validateEmail = User.findOne({email})
+	if(!validateEmail) throw new Error('Invalid Data')
+
+	if (password !== validateEmail.password) throw new Error('Invalid Data')
+
+	return validateEmail
+}
+
 
 function getByIdAndServices(id) {
 	return User.findById(id)
@@ -35,15 +44,10 @@ function getByIdAndServices(id) {
 }
 
 function updateById (id, newData) {
-	console.log('newData')
-	console.log(newData)
 
 	return User.findByIdAndUpdate(id, newData)
 }
 
-function getServices (id) {
-	return services.findById(id)
-}
 
 function deleteById(id) {
 	return User.findByIdAndUpdate(id, { updateDate: Date.now(), isActive: false })
@@ -54,6 +58,7 @@ module.exports = {
 	create,
 	getAll,
 	getById,
+	getLogin,
 	getByIdAndServices,
 	deleteById,
 	updateById

@@ -24,7 +24,6 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
-		console.log(req.params)
 		const {id} = req.params
 		const UserFound = await User.getById(id)
 		res.json({
@@ -42,6 +41,27 @@ router.get('/:id', async(req, res) => {
 		})
 	}
 })
+
+router.get('/', async(req, res) => {
+	try {
+		const {email, password} = req.body
+		const emailFound = await User.getLogin(email, password)
+
+		res.json({
+			success: true,
+			data: {
+			  user: UserFound
+			}
+		})
+	}catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	}
+})
+
 
 
 router.post('/', async(req, res) => {

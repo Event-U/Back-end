@@ -1,6 +1,7 @@
 const CompanyBussine = require('../models/companyBussine')
 
 function create({name, createDate, updateDate, isActive}) {
+	console.log(name)
 	return CompanyBussine.create({
 		name, 
 		createDate, 

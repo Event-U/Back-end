@@ -24,6 +24,16 @@ const serviceSchema = mongoose.Schema({
 		minlength: 1,
 		required: true
 	},
+	image: {
+		type: String,
+		required: true
+	},
+	catService: {
+		type: [{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'catServices'
+		}]
+	},
 	createDate: {
 		type: Date,
 		required: true,
