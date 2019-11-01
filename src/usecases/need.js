@@ -1,11 +1,12 @@
 const Need = require('../models/need')
 
-function create({descripption, Services, userProvider, idEvent, createdate, updateDate, isActive }) {
+function create({description, date, service, userProvider, event, createDate, updateDate, isActive }) {
 	description, 
-	Services, 
+	date,
+	service, 
 	userProvider, 
-	Events, 
-	createdate, 
+	event, 
+	createDate, 
 	updateDate, 
 	isActive
 }
@@ -18,13 +19,18 @@ function getById(id) {
 	return Need.findById(id)
 }
 
+function updateById (id, newData) {
+	return Need.findByIdAndUpdate(id, newData)
+}
+
 function deleteById(id) {
-	return Need.FindByIdAndDelete(id, { updateDate: now, isActive: false })
+	return Need.findByIdAndUpdate(id, { updateDate: now, isActive: false })
 }
 
 module.exports={
 	create, 
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

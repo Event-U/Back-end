@@ -1,15 +1,16 @@
 const express = require('express')
-const Service = require('../usecases/service')
+const catServices = require('../usecases/catServices')
+
 const router = express.Router()
- 
+
 router.get('/', async(req, res) => {
-	try {
-		const allServices = await Service.getAll()
+	try{
+		const allCatServices = await catServices.getAll()
 		res.json({
 			success: true,
-			message: 'All Services',
+			message: 'All catServices',
 			data: {
-				service: allServices
+				catServices: allCatServices
 			}
 		})
 	} catch (error) {
@@ -22,14 +23,14 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/:id', async(req, res) => {
-	try {
-		const {id} = req.params
-		const ServiceFound = await Service.getById(id)
-			res.json({
+	try{
+		const { id } = req.params
+		const catServicesFound = await catServices.getById(id)
+		res.json({
 			success: true,
-			message: `Service ${id} found`,
+			message: 'CatServices Found',
 			data: {
-				service: ServiceFound
+				catServices: catServicesFound
 			}
 		})
 	} catch (error) {
@@ -41,14 +42,17 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
+
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createService = await Service.create(data)
+		const createCatService = await catServcies.create(data)
 		res.json({
 			success: true,
-			message: 'Created service',
-			service: createService
+			message: 'Created catService',
+			data: {
+				catServices: createCatService
+			}
 		})
 	} catch (error) {
 		res.json({
@@ -63,13 +67,13 @@ router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
 		const { body } = req.body
-		const serviceUpdate = await service.updateById(id, body)
+		const catServiceUpdate = await catService.updateById(id, body)
 
 		Response.json ({
 			success: true,
-			message: 'Service ${id} update',
+			message: 'CatService ${id} update',
 			data: {
-				service: serviceUpdate
+				catService: catServiceUpdate
 			}
 		})
 	} catch (error) {
@@ -81,27 +85,25 @@ router.patch('/:id', async (req, res) => {
 	} 
 })
 
-router.delete('/:id', async(req, res) => {
-	try{
-		const { id } = req.params
-		const deleteService = await Service.findByIdAndUpdate(id,
-			{isActive: false, updateDate: Date.now()})
 
+router.delete('/id', async(req, res) => {
+	try {
+		const { id } = req.params
+		const deleteCatServices = await catServcies.delete(id)
 		res.json({
 			success: true,
-			message: 'Deleted service',
+			message: 'Delete catServices',
 			data: {
-				service: deleteService
+				catServices: deleteCatServices
 			}
 		})
 	} catch (error) {
 		res.json({
-			success: false,
-			message: 'Something went wrong',
+			succes: false,
+			message: 'Something went wrong catServices',
 			error: error.message
 		})
 	}
 })
 
-
-module.exports = router
+ module.exports = router

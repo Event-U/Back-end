@@ -1,38 +1,39 @@
 const express = require('express')
-const Service = require('../usecases/service')
+
+const address = require('../usecases/address')
+
 const router = express.Router()
- 
+
 router.get('/', async(req, res) => {
 	try {
-		const allServices = await Service.getAll()
+		const allAddress = await address.getAll()
 		res.json({
 			success: true,
-			message: 'All Services',
+			message: 'All address',
 			data: {
-				service: allServices
+				address: allAddress
 			}
-		})
+		})	
 	} catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
 
 router.get('/:id', async(req, res) => {
 	try {
-		const {id} = req.params
-		const ServiceFound = await Service.getById(id)
-			res.json({
+		const addressFound = await address.getById(id)
+		res.json({
 			success: true,
-			message: `Service ${id} found`,
+			message: 'Address ${id} found',
 			data: {
-				service: ServiceFound
+			  address: addressFound
 			}
 		})
-	} catch (error) {
+	}catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
@@ -44,11 +45,13 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createService = await Service.create(data)
+		const createAddress = await address.create(data)
 		res.json({
 			success: true,
-			message: 'Created service',
-			service: createService
+			message: 'Created address',
+			data: {
+				address: createAddress
+			}
 		})
 	} catch (error) {
 		res.json({
@@ -61,15 +64,13 @@ router.post('/', async(req, res) => {
 
 router.patch('/:id', async (req, res) => {
 	try{
-		const { id } = req.params
-		const { body } = req.body
-		const serviceUpdate = await service.updateById(id, body)
-
-		Response.json ({
+		console.log('Entra al patch')
+		const AddressUpdate = await user.updateById(id, data)
+		res.json ({
 			success: true,
-			message: 'Service ${id} update',
+			message: 'Address ${id} update',
 			data: {
-				service: serviceUpdate
+				address: AddressUpdate
 			}
 		})
 	} catch (error) {
@@ -83,15 +84,13 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async(req, res) => {
 	try{
-		const { id } = req.params
-		const deleteService = await Service.findByIdAndUpdate(id,
-			{isActive: false, updateDate: Date.now()})
-
+		const deleteAddress = await address.findByIdAndUpdate(id, 
+				{isActive: false, updateDate: Date.now()})
 		res.json({
 			success: true,
-			message: 'Deleted service',
+			message: 'Deleted address',
 			data: {
-				service: deleteService
+				address: deleteAddress
 			}
 		})
 	} catch (error) {
@@ -102,6 +101,5 @@ router.delete('/:id', async(req, res) => {
 		})
 	}
 })
-
 
 module.exports = router

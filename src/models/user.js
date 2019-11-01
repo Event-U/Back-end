@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: false
   },
-  bussinessName: {
+  bussinesName: {
     type: String,
     minlength: 3,
     maxlength: 150,
@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
   companyBussines: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'companyBussine'
+      ref: 'companyBussines'
     }]
   },
   email: {

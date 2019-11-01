@@ -1,29 +1,42 @@
-const Event = require('../models/event')
+const event = require('../models/event')
 
-function create ({eventDate, address, organizator, investment, createDate, updateDate }) {
-	eventDate, 
-	address, 
-	organizator, 
-	investment, 
-	createDate, 
-	updateDate
+function create({name, description, date, addresses, image, organizator, investments, isPay, createDate, updateDate, isActive }) {
+	console.log('create')
+	return event.create({
+		name,
+		description,
+		date, 
+		addresses, 
+		image,
+		organizator, 
+		investments, 
+		isPay,
+		createDate, 
+		updateDate,
+		isActive	
+	})
 }
 
 function getAll() {
-	return Event.find()
+	return event.find()
 }
 
 function getById(id) {
-	return Event.find(id)
+	return event.findById(id)
+}
+
+function updateById(id, newData) {
+	return event.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
-	return Event.findByIdDelete(id, { updateDate: now, isActive: false })
+	return event.findByIdDelete(id, { updateDate: now, isActive: false })
 }
 
-module.export = {
+module.exports = {
 	create,
 	getAll,
 	getById,
+	updateById,
 	deleteById
 }

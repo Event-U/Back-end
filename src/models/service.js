@@ -26,16 +26,19 @@ const serviceSchema = mongoose.Schema({
 	},
 	createDate: {
 		type: Date,
+		required: true,
 		default: Date.now()
 	},
-	UpdateDate: {
+	updateDate: {
 		type: Date,
+		required: true,
 		default: Date.now()
 	},
 	isActive: {
 		type: Boolean,
+		required: true,
 		default: true
 	}
 })
 
-module.exports = mongoose.model('Service', serviceSchema)
+module.exports = mongoose.model('service', serviceSchema)

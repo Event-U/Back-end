@@ -1,38 +1,38 @@
 const express = require('express')
-const Service = require('../usecases/service')
+const investment = require('../usecases/investment')
+
 const router = express.Router()
- 
+
 router.get('/', async(req, res) => {
 	try {
-		const allServices = await Service.getAll()
+		const allInvestment = await investment.getAll()
 		res.json({
 			success: true,
-			message: 'All Services',
+			message: 'All Investment',
 			data: {
-				service: allServices
+				investment: allInvestment
 			}
-		})
+		})	
 	} catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
 
 router.get('/:id', async(req, res) => {
 	try {
-		const {id} = req.params
-		const ServiceFound = await Service.getById(id)
-			res.json({
+		const investmentFound = await investment.getById(id)
+		res.json({
 			success: true,
-			message: `Service ${id} found`,
+			message: 'Investment ${id} encontrado',
 			data: {
-				service: ServiceFound
+			  investment: investmentFound
 			}
 		})
-	} catch (error) {
+	}catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
@@ -44,11 +44,13 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createService = await Service.create(data)
+		const createInvestment = await investment.create(data)
 		res.json({
 			success: true,
-			message: 'Created service',
-			service: createService
+			message: 'Created investment',
+			data: {
+				investment: createInvestment
+			}
 		})
 	} catch (error) {
 		res.json({
@@ -63,13 +65,12 @@ router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
 		const { body } = req.body
-		const serviceUpdate = await service.updateById(id, body)
-
+		const investmentUpdate = await investment.updateById(id, body)
 		Response.json ({
 			success: true,
-			message: 'Service ${id} update',
+			message: 'investment ${id} update',
 			data: {
-				service: serviceUpdate
+				investment: investmentUpdate
 			}
 		})
 	} catch (error) {
@@ -84,14 +85,13 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteService = await Service.findByIdAndUpdate(id,
-			{isActive: false, updateDate: Date.now()})
-
+		const deleteInvestment = await investment.findByIdAndUpdate(id, 
+				{isActive: false, updateDate: Date.now()})
 		res.json({
 			success: true,
-			message: 'Deleted service',
+			message: 'Deleted investment',
 			data: {
-				service: deleteService
+				investment: deleteInvestment
 			}
 		})
 	} catch (error) {
@@ -102,6 +102,5 @@ router.delete('/:id', async(req, res) => {
 		})
 	}
 })
-
 
 module.exports = router

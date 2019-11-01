@@ -24,11 +24,12 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
-		const { id } = req.params
-		const UserFound = await User.getById
+		console.log(req.params)
+		const {id} = req.params
+		const UserFound = await User.getById(id)
 		res.json({
 			success: true,
-			message: 'User found',
+			message: `User ${id} encontrado`,
 			data: {
 			  user: UserFound
 			}
@@ -42,26 +43,6 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
-router.delete('/:id', async(req, res) => {
-	try{
-		const { id } = req.params
-		const deleteUser = await User.findByIdAndUpdaate(id, 
-				{isActive: false, updateDate: Date.now()})
-		res.json({
-			success: true,
-			message: 'Deleted users',
-			data: {
-				user: deleteUser
-			}
-		})
-	} catch (error) {
-		res.json({
-			success: false,
-			message: 'Something went wrong',
-			error: error.message
-		})
-	}
-})
 
 router.post('/', async(req, res) => {
 	try {
@@ -79,6 +60,55 @@ router.post('/', async(req, res) => {
 			success: false,
 			message: 'Something went wrong',
 			error: error
+		})
+	}
+})
+
+router.patch('/:id', async (req, res) => {
+	try{
+		console.log('Entra al patch')
+		// console.log(req.params)
+		// console.log(req.body)
+	
+		const { id } = req.params
+		const body = req.body
+		console.log (body)
+		const UserUpdate = await User.updateById(id, body)
+		console.log('llego')
+		
+		res.json({
+			success: true,
+			message: 'User ${id} update',
+			data: {
+				user: UserUpdate
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	} 
+})
+
+router.delete('/:id', async(req, res) => {
+	try{
+		const { id } = req.params
+		const deleteUser = await User.findByIdAndUpdate(id, 
+				{isActive: false, updateDate: Date.now()})
+		res.json({
+			success: true,
+			message: 'Deleted users',
+			data: {
+				user: deleteUser
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
 		})
 	}
 })

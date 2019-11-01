@@ -1,38 +1,39 @@
 const express = require('express')
-const Service = require('../usecases/service')
+const event = require('../usecases/event')
+
 const router = express.Router()
- 
+
 router.get('/', async(req, res) => {
 	try {
-		const allServices = await Service.getAll()
+		const allEvents = await event.getAll()
 		res.json({
 			success: true,
-			message: 'All Services',
+			message: 'All events',
 			data: {
-				service: allServices
+				event: allEvents
 			}
-		})
+		})	
 	} catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
 
 router.get('/:id', async(req, res) => {
 	try {
-		const {id} = req.params
-		const ServiceFound = await Service.getById(id)
-			res.json({
+		const { id } = req.params
+		const eventFound = await event.getById(id)
+		res.json({
 			success: true,
-			message: `Service ${id} found`,
+			message: 'event found',
 			data: {
-				service: ServiceFound
+			  event: eventFound
 			}
 		})
-	} catch (error) {
+	}catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
@@ -44,17 +45,21 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createService = await Service.create(data)
+		console.log(data)
+
+		const createEvent = await event.create(data)
 		res.json({
 			success: true,
-			message: 'Created service',
-			service: createService
-		})
+			message: 'Created event',
+			data: {
+				event: createEvent
+			}
+		}) 
 	} catch (error) {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
@@ -62,14 +67,14 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
-		const { body } = req.body
-		const serviceUpdate = await service.updateById(id, body)
+		const body = req.body
+		const eventUpdate = await event.updateById(id, body)
 
-		Response.json ({
+		res.json ({
 			success: true,
-			message: 'Service ${id} update',
+			message: 'Event ${id} update',
 			data: {
-				service: serviceUpdate
+				event: eventUpdate
 			}
 		})
 	} catch (error) {
@@ -84,14 +89,13 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteService = await Service.findByIdAndUpdate(id,
-			{isActive: false, updateDate: Date.now()})
-
+		const deleteEvent = await event.findByIdAndUpdate(id, 
+				{isActive: false, updateDate: Date.now()})
 		res.json({
 			success: true,
-			message: 'Deleted service',
+			message: 'Deleted event',
 			data: {
-				service: deleteService
+				event: deletEevent
 			}
 		})
 	} catch (error) {
@@ -102,6 +106,5 @@ router.delete('/:id', async(req, res) => {
 		})
 	}
 })
-
 
 module.exports = router
