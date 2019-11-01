@@ -1,21 +1,22 @@
 const express = require('express')
-const User = require('../usecases/user')
+const quotation = require('../usecases/quotation')
 
 const router = express.Router()
 
+
 router.get('/', async(req, res) => {
-	try {
-		const allUsers = await User.getAll()
+	try{
+		const allquotation = await quotation.getAll()
 		res.json({
 			success: true,
-			message: 'All Users',
+			message: 'All quotation',
 			data: {
-				user: allUsers
+				quotation: allquotation
 			}
-		})	
+		})
 	} catch (error) {
 		res.json({
-			success: false,
+			succes: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
@@ -25,62 +26,55 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try {
 		console.log(req.params)
-		const {id} = req.params
-		const UserFound = await User.getById(id)
+		const { id } = req.params
+		const quotationFound = await quotation.getById(id)
+			res.json({
+				success: true,
+				message: 'quotation Found',
+				data: {
+					quotation: quotationFound
+				}
+			})
+	}	catch (error) {
 		res.json({
-			success: true,
-			message: `User ${id} encontrado`,
-			data: {
-			  user: UserFound
-			}
-		})
-	}catch (error) {
-		res.json({
-			success: false,
+			succes: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
 	}
 })
 
-
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createUser = await User.create(data)
+		const createQuotation = await quotation.create(data)
 		res.json({
 			success: true,
-			message: 'Created user',
+			message: 'Created quotation',
 			data: {
-				user: createUser
+				quotation: createQuotation
 			}
 		})
 	} catch (error) {
 		res.json({
-			success: false,
+			succes: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
 
 router.patch('/:id', async (req, res) => {
 	try{
-		console.log('Entra al patch')
-		// console.log(req.params)
-		// console.log(req.body)
-	
 		const { id } = req.params
 		const body = req.body
-		console.log (body)
-		const UserUpdate = await User.updateById(id, body)
-		console.log('llego')
-		
-		res.json({
+		const quotationUpdate = await quotation.updateById(id, body)
+
+		res.json ({
 			success: true,
-			message: 'User ${id} update',
+			message: `quotation ${id} update`,
 			data: {
-				user: UserUpdate
+				quotation: quotationUpdate
 			}
 		})
 	} catch (error) {
@@ -95,22 +89,22 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteUser = await User.findByIdAndUpdate(id, 
-				{isActive: false, updateDate: Date.now()})
+		const deletequotation = await quotation.deleteById(id)
 		res.json({
-			success: true,
-			message: 'Deleted users',
+			succes: true,
+			message: 'Deleted quotation',
 			data: {
-				user: deleteUser
+				quotation: deletequotation
 			}
 		})
 	} catch (error) {
 		res.json({
-			success: false,
+			succes: false,
 			message: 'Something went wrong',
 			error: error.message
 		})
 	}
 })
+
 
 module.exports = router

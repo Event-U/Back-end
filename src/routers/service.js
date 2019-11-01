@@ -62,12 +62,12 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
-		const { body } = req.body
-		const serviceUpdate = await service.updateById(id, body)
+		const body = req.body
+		const serviceUpdate = await Service.updateById(id, body)
 
-		Response.json ({
+		res.json ({
 			success: true,
-			message: 'Service ${id} update',
+			message: `Service ${id} update`,
 			data: {
 				service: serviceUpdate
 			}

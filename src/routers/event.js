@@ -45,7 +45,6 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		console.log(data)
 
 		const createEvent = await event.create(data)
 		res.json({
@@ -66,8 +65,10 @@ router.post('/', async(req, res) => {
 
 router.patch('/:id', async (req, res) => {
 	try{
+		console.log('llego a patch')
 		const { id } = req.params
 		const body = req.body
+		console.log(body)
 		const eventUpdate = await event.updateById(id, body)
 
 		res.json ({

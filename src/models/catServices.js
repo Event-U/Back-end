@@ -15,17 +15,14 @@ const catServicesSchema = new mongoose.Schema({
 	},
 	createDate: {
 		type: Date,
-		default: Date.now(),
-		required: true
+		default: Date.now()
 	},
 	updateDate: {
 		type: Date,
-		default: Date.now(),
-		required: true
+		default: Date.now()
 	}, 
 	isActive: {
 		type: Boolean,
-		require: true,
 		default: true
 	}
 })

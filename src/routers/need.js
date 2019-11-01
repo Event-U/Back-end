@@ -8,7 +8,7 @@ router.get('/', async(req, res) => {
 	try{
 		const allNeed = await Need.getAll()
 		res.json({
-			succes: true,
+			success: true,
 			message: 'All Need',
 			data: {
 				Need: allNeed
@@ -64,12 +64,12 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
-		const { body } = req.body
-		const NeedUpdate = await need.updateById(id, body)
+		const body = req.body
+		const NeedUpdate = await Need.updateById(id, body)
 
-		Response.json ({
+		res.json ({
 			success: true,
-			message: 'Need ${id} update',
+			message: `Need ${id} update`,
 			data: {
 				Need: NeedUpdate
 			}

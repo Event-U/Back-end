@@ -8,6 +8,7 @@ const catServicesRouters = require('./routers/catServices')
 const needRouters = require('./routers/need')
 const addressRouters = require('./routers/address')
 const investmentRouters = require('./routers/investment')
+const quotationRouters = require('./routers/quotation')
 
 
 const cors = require('cors')
@@ -23,6 +24,7 @@ app.use('/catServices', catServicesRouters)
 app.use('/need', needRouters)
 app.use('/address', addressRouters)
 app.use('/investment', investmentRouters)
+app.use('/quotation', quotationRouters)
 
 
 app.get('/', (req, res) => {
