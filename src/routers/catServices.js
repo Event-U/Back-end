@@ -46,7 +46,8 @@ router.get('/:id', async(req, res) => {
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
-		const createCatService = await catServcies.create(data)
+		console.log(data)
+		const createCatService = await catServices.create(data)
 		res.json({
 			success: true,
 			message: 'Created catService',
@@ -58,7 +59,7 @@ router.post('/', async(req, res) => {
 		res.json({
 			success: false,
 			message: 'Something went wrong',
-			error: error
+			error: error.message
 		})
 	}
 })
@@ -66,12 +67,13 @@ router.post('/', async(req, res) => {
 router.patch('/:id', async (req, res) => {
 	try{
 		const { id } = req.params
-		const { body } = req.body
-		const catServiceUpdate = await catService.updateById(id, body)
+		const body = req.body
 
-		Response.json ({
+		const catServiceUpdate = await catServices.updateById(id, body)
+
+		res.json ({
 			success: true,
-			message: 'CatService ${id} update',
+			message: `CatService ${id} update`,
 			data: {
 				catService: catServiceUpdate
 			}

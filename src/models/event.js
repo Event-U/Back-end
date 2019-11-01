@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const eventSchema = new mongoose.Schema ({
 	name: {
 		type: String,
-		minlength: 10,
-		maxlength: 50
+		minlength: 3,
+		maxlength: 200
 	},
 	description: {
 		type: String,
