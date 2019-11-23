@@ -20,9 +20,15 @@ function create({name, description, date, addresses, image, organizator, investm
 function getAll() {
 	return event.find()
 }
-
+///// probar esto es postman y hacer asi las peticiones que requiera
 function getById(id) {
 	return event.findById(id)
+	.pupulate({ 
+		path: 'needs',
+		populate:{
+			path: 'quotes'
+		}
+	})
 }
 
 function updateById(id, newData) {

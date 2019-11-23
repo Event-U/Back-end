@@ -62,8 +62,6 @@ router.get('/', async(req, res) => {
 	}
 })
 
-
-
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
@@ -84,11 +82,34 @@ router.post('/', async(req, res) => {
 	}
 })
 
+router.post('/login', async (req, res) => {
+	try {
+		const data = req.body
+		console.log('post/login data:', data)
+		const token = await User.getLogin(data.email, data.password)
+		res.json({
+			success: true,
+			message: 'Usuario Logeado',
+			data: {
+				token,
+				
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	}
+})
+
 router.patch('/:id', async (req, res) => {
+	console.log('llego')
 	try{
 		console.log('Entra al patch')
-		// console.log(req.params)
-		// console.log(req.body)
+		console.log(req.params)
+		console.log(req.body)
 	
 		const { id } = req.params
 		const body = req.body

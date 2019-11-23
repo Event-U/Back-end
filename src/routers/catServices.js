@@ -42,6 +42,26 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
+router.get('/:name', async(req, res) => {
+	try{
+		const { id } = req.params
+		const catServicesFound = await catServices.getById(id)
+		res.json({
+			success: true,
+			message: 'CatServices Found',
+			data: {
+				catServices: catServicesFound
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	}
+})
+
 
 router.post('/', async(req, res) => {
 	try {

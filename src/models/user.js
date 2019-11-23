@@ -1,25 +1,14 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-  isOrganizer: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-  isProvider: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-  isStakeHolder: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
+  typeUser: [{
+    type: String,
+    required: true
+  }],
   services: {
     type: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service'
+        ref: 'service'
     }]
   },
   isActiveNotification: {
@@ -43,7 +32,7 @@ const userSchema = new mongoose.Schema({
   companyBussines: {
     type: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'companyBussines'
+      ref: 'companyBussine'
     }]
   },
   email: {

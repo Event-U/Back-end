@@ -94,7 +94,7 @@ router.patch('/:id', async (req, res) => {
 	try{
 
 		const { id } = req.params
-		const bbody = req.body
+		const body = req.body
 		const CompanyBussineUpdate = await CompanyBussine.updateById(id, body)
 
 		Response.json ({

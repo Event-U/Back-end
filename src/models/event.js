@@ -53,7 +53,11 @@ const eventSchema = new mongoose.Schema ({
 		type: Boolean,
 		required: true,
 		default: true
-	}
+	},
+	needs: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Need'
+	}]
 }) 
 
 module.exports = mongoose.model('event', eventSchema) 

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const needSchema = mongoose.Schema ({
 	description: {
 		type: String,
-		minlength: 10,
+		minlength: 5,
 		maxlength: 200,
 		requerid: true
 	},
@@ -17,12 +17,10 @@ const needSchema = mongoose.Schema ({
 			ref: 'Services'
 		}]
 	},
-	event: {
-		type: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Event'
-		}]
-	}
+	quotes: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'quotation'
+	}]
 })
 
 module.exports = mongoose.model('Need', needSchema)

@@ -1,6 +1,9 @@
+const bcrypt = require('../lib/bcrypt')
+const jwt = require('../lib/jwt')
 const User = require('../models/user')
 
-function create({isOrganizator, isProvider, isStakeHolder, services, isActiveNotification, bussinesName, rfc, companyBussines, email, password, phone, createDate, updateDate}) {
+async function create({isOrganizator, isProvider, isStakeHolder, services, isActiveNotification, bussinesName, rfc, companyBussines, email, password, phone, createDate, updateDate}) {
+	const hash = await bcrypt.hash(password)
 	return User.create({ 
 		isOrganizator,
     isProvider,
@@ -11,7 +14,7 @@ function create({isOrganizator, isProvider, isStakeHolder, services, isActiveNot
 		rfc,
 	  companyBussines,
 		email,
-		password,
+		password: hash,
 		phone,
 		createDate,
 		updateDate
@@ -28,13 +31,16 @@ function getById(id) {
 	.populate('companyBussines')
 }
 
-function getLogin(email, password) {
-	const validateEmail = User.findOne({email})
-	if(!validateEmail) throw new Error('Invalid Data')
+async function getLogin(email, password) {
+	console.log('email:', email)
+	console.log('password:', password)
+	const userFound = await User.findOne({email})
+	if(!userFound) throw new Error('No se encontro un usuario con este email')
 
-	if (password !== validateEmail.password) throw new Error('Invalid Data')
+	const validPassword = await bcrypt.compare(password, userFound.password)
+	if (!validPassword) throw new Error('Password incorrecto')
 
-	return validateEmail
+	return jwt.sign({id: userFound._id})
 }
 
 
