@@ -37,6 +37,7 @@ async function getLogin(email, password) {
 	const userFound = await User.findOne({email})
 	if(!userFound) throw new Error('No se encontro un usuario con este email')
 
+	console.log('userFound', userFound)
 	const validPassword = await bcrypt.compare(password, userFound.password)
 	if (!validPassword) throw new Error('Password incorrecto')
 
