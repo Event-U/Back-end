@@ -1,16 +1,16 @@
 const express = require('express')
-const catServices = require('../usecases/catServices')
+const category = require('../usecases/category')
 
 const router = express.Router()
 
 router.get('/', async(req, res) => {
 	try{
-		const allCatServices = await catServices.getAll()
+		const allCategory = await category.getAll()
 		res.json({
 			success: true,
-			message: 'All catServices',
+			message: 'All category',
 			data: {
-				catServices: allCatServices
+				category: allCategory
 			}
 		})
 	} catch (error) {
@@ -25,12 +25,13 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const catServicesFound = await catServices.getById(id)
+		console.log('llega aqui')
+		const categoryFound = await category.getByIdAndServices(id)
 		res.json({
 			success: true,
-			message: 'CatServices Found',
+			message: 'category Found',
 			data: {
-				catServices: catServicesFound
+				category: categoryFound
 			}
 		})
 	} catch (error) {
@@ -42,17 +43,16 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
-
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
 		console.log(data)
-		const createCatService = await catServices.create(data)
+		const createCategory = await category.create(data)
 		res.json({
 			success: true,
-			message: 'Created catService',
+			message: 'Categoria creada',
 			data: {
-				catServices: createCatService
+				category: createCategory
 			}
 		})
 	} catch (error) {
@@ -69,40 +69,40 @@ router.patch('/:id', async (req, res) => {
 		const { id } = req.params
 		const body = req.body
 
-		const catServiceUpdate = await catServices.updateById(id, body)
+		const categoryUpdate = await category.updateById(id, body)
 
 		res.json ({
 			success: true,
-			message: `CatService ${id} update`,
+			message: `Categoria ${id} actualizada`,
 			data: {
-				catService: catServiceUpdate
+				category: categoryUpdate
 			}
 		})
 	} catch (error) {
 		res.json({
 			success: false,
-			message: 'Something went wrong',
+			message: 'Error al actualizar category',
 			error: error.message
 		})
 	} 
 })
 
 
-router.delete('/id', async(req, res) => {
+router.delete('/:id', async(req, res) => {
 	try {
 		const { id } = req.params
-		const deleteCatServices = await catServcies.delete(id)
+		const deleteCategory = await category.deleteById(id)
 		res.json({
 			success: true,
-			message: 'Delete catServices',
+			message: 'Categoria borrada',
 			data: {
-				catServices: deleteCatServices
+				category: deleteCategory
 			}
 		})
 	} catch (error) {
 		res.json({
 			succes: false,
-			message: 'Something went wrong catServices',
+			message: 'Error al borrar category',
 			error: error.message
 		})
 	}

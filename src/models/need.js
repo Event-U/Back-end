@@ -2,27 +2,31 @@ const mongoose = require('mongoose')
 
 const needSchema = mongoose.Schema ({
 	description: {
+		minlength: 5,
 		type: String,
-		minlength: 10,
 		maxlength: 200,
 		requerid: true
 	},
-	date: {
-		type: Date,
-		required: true
-	}, 
 	service: {
+		type: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'service'
+		}
+	},
+	quotation: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Services'
+			ref: 'quotation'
 		}]
 	},
-	event: {
-		type: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Event'
-		}]
+	isAwared: {
+		type: Boolean,
+		requerid: true,
+		default: false
 	}
 })
+
+
+
 
 module.exports = mongoose.model('Need', needSchema)

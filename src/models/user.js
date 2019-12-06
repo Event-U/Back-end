@@ -1,25 +1,14 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-  isOrganizer: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-  isProvider: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
-  isStakeHolder: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
+  typeUser: [{
+    type: String,
+    required: true
+  }],
   services: {
     type: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service'
+        ref: 'service'
     }]
   },
   isActiveNotification: {
@@ -30,7 +19,7 @@ const userSchema = new mongoose.Schema({
   bussinesName: {
     type: String,
     minlength: 3,
-    maxlength: 150,
+    maxlength: 200,
     required: true,
   },
   rfc: {
@@ -39,12 +28,6 @@ const userSchema = new mongoose.Schema({
     maxlength: 13,
     // pattern: /^.+@.+\..+$/,
     require: true
-  },
-  companyBussines: {
-    type: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'companyBussines'
-    }]
   },
   email: {
     type: String,
@@ -64,22 +47,12 @@ const userSchema = new mongoose.Schema({
     minlength: 10,
     maxlength: 15
   },
-  createDate: {
-    type: Date,
-    required: true,
-    default: Date.now()    
-  },
-  UpdateDate: {
-    type: Date,
-    required: true,
-    default: Date.now()
-  },
-  isActive: {
-    type: Boolean,
-    required: true,
-    default: false
+  addresses: {
+    type: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'address'
+    }]
   }
-
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)   

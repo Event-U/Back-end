@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const quotationSchema = mongoose.Schema ({
 	provider: {
-		type: String,
-		required: true
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
 	},
 	price: {
 		type: Number,
@@ -14,15 +14,20 @@ const quotationSchema = mongoose.Schema ({
 		maxlength: 200,
 		required: true
 	},
-	idNeed: {
+	image: {
 		type: String,
-		required: true
+		required: false
 	},
-	idAwarded: {
-		type: Boolean,
-		default: false
+		need: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Need'
+	}],
+	status: {
+		type: Number,
+		required: true,
+		default: 1
 	}
 
-})
+})		
 
 module.exports = mongoose.model('quotation', quotationSchema)

@@ -1,6 +1,6 @@
 const event = require('../models/event')
 
-function create({name, description, date, addresses, image, organizator, investments, isPay, createDate, updateDate, isActive }) {
+function create({name, description, date, addresses, image, organizator, investments, needs}) {
 	console.log('create')
 	return event.create({
 		name,
@@ -9,11 +9,8 @@ function create({name, description, date, addresses, image, organizator, investm
 		addresses, 
 		image,
 		organizator, 
-		investments, 
-		isPay,
-		createDate, 
-		updateDate,
-		isActive	
+		investments,
+		needs
 	})
 }
 
@@ -23,20 +20,41 @@ function getAll() {
 
 function getById(id) {
 	return event.findById(id)
+	.populate('need')
 }
+
+function getByOrganizator(organizator) {
+	return event.findOne(organizator)
+	.populate('need')
+}
+
+///// probar esto es postman y hacer asi las peticiones que requiera
+function getByIds(id) {
+	return event.findById(id)
+	.pupulate({ 
+		path: 'needs',
+		populate:{
+			path: 'quotes'
+		}
+	})
+}
+
+
+
 
 function updateById(id, newData) {
 	return event.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
-	return event.findByIdDelete(id, { updateDate: now, isActive: false })
+	return event.findByIdAndDelete(id)
 }
 
 module.exports = {
 	create,
 	getAll,
 	getById,
+	getByOrganizator,
 	updateById,
 	deleteById
 }
