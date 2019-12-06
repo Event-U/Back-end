@@ -1,7 +1,5 @@
 const express = require('express')
-
 const address = require('../usecases/address')
-
 const router = express.Router()
 
 router.get('/', async(req, res) => {
@@ -25,10 +23,11 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
 	try {
+		const {id} = req.params
 		const addressFound = await address.getById(id)
 		res.json({
 			success: true,
-			message: 'Address ${id} found',
+			message: `Address ${id} found`,
 			data: {
 			  address: addressFound
 			}
@@ -36,7 +35,7 @@ router.get('/:id', async(req, res) => {
 	}catch (error) {
 		res.json({
 			success: false,
-			message: 'Something went wrong',
+			message: 'Error al encontrar address',
 			error: error.message
 		})
 	}
@@ -64,11 +63,12 @@ router.post('/', async(req, res) => {
 
 router.patch('/:id', async (req, res) => {
 	try{
-		console.log('Entra al patch')
-		const AddressUpdate = await user.updateById(id, data)
+		const { id } = req.params
+		const data = req.body
+		const AddressUpdate = await address.updateById(id, data)
 		res.json ({
 			success: true,
-			message: 'Address ${id} update',
+			message: `Address ${id} update`,
 			data: {
 				address: AddressUpdate
 			}
@@ -84,19 +84,16 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async(req, res) => {
 	try{
-		const deleteAddress = await address.findByIdAndUpdate(id, 
-				{isActive: false, updateDate: Date.now()})
+		const { id } = req.params
+		const deleteAddress = await address.deleteById(id)
 		res.json({
 			success: true,
 			message: 'Deleted address',
-			data: {
-				address: deleteAddress
-			}
 		})
 	} catch (error) {
 		res.json({
 			success: false,
-			message: 'Something went wrong',
+			message: 'Error al borrar Address',
 			error: error.message
 		})
 	}

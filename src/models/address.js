@@ -17,7 +17,7 @@ const addressSchema = new mongoose.Schema({
 		type: String,
 		minlength: 1,
 		maxlength: 50,
-		required: true
+		required: false
 	},
 	place: {
 		type: String,
@@ -55,21 +55,8 @@ const addressSchema = new mongoose.Schema({
 	users: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
+			ref: 'user'
 		}]
-	},
-	createDate: {
-		type: Date,
-		required: true
-	},
-	updateDate: {
-		type: Date,
-		required: true
-	}, 
-	isActive: {
-		type: Boolean, 
-		required: true,
-		default: false
 	}
 })
 

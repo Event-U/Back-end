@@ -1,11 +1,11 @@
 const Need = require('../models/need')
 
-function create({description, date, service, event}) {
+function create({description, service, quotation, isAwared}) {
 	return Need.create({
 		description, 
-		date,
-		service, 
-		event 
+		service,
+		quotation,
+		isAwared 
 	})
 }
 
@@ -38,7 +38,7 @@ function updateById (id, newData) {
 }
 
 function deleteById(id) {
-	return Need.findByIdAndUpdate(id, { updateDate: now, isActive: false })
+	return Need.findByIdAndDelete(id)
 }
 
 module.exports = {

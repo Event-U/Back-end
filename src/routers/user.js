@@ -1,6 +1,5 @@
 const express = require('express')
 const User = require('../usecases/user')
-
 const router = express.Router()
 
 router.get('/', async(req, res) => {
@@ -21,27 +20,6 @@ router.get('/', async(req, res) => {
 		})
 	}
 })
-
-router.get('/', async(req, res) => {
-	try {
-		const {email, password} = req.body
-		const emailFound = await User.getLogin(email, password)
-
-		res.json({
-			success: true,
-			data: {
-			  user: UserFound
-			}
-		})
-	}catch (error) {
-		res.json({
-			success: false,
-			message: 'Something went wrong',
-			error: error.message
-		})
-	}
-})
-
 
 router.post('/', async(req, res) => {
 	try {
@@ -81,26 +59,6 @@ router.post('/login', async (req, res) => {
 		})
 	}
 })
-router.get('/login', async (req, res) => {
-	try {
-		console.log('get/login data:', req.query)
-		const data = req.query
-		const userData = await User.getLogin(data.email, data.password)
-		res.json({
-			success: true,
-			message: 'Usuario Logeado',
-			data: userData
-		})
-	} catch (error) {
-		res.json({
-			success: false,
-			message: 'Something went wrong get login',
-			error: error.message
-		})
-	}
-})
-
-
 
 router.get('/:id', async(req, res) => {
 	try {
@@ -123,19 +81,12 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
-
 router.patch('/:id', async (req, res) => {
-/*	console.log('llego') */
 	try{
-	/*	console.log('Entra al patch')
-		console.log(req.params)
-		console.log(req.body)
-	*/
+		console.log('llega a patch')
 		const { id } = req.params
 		const body = req.body
-		console.log (body)
 		const UserUpdate = await User.updateById(id, body)
-		console.log('llego')
 		
 		res.json({
 			success: true,
@@ -156,8 +107,7 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteUser = await User.findByIdAndUpdate(id, 
-				{isActive: false, updateDate: Date.now()})
+		const deleteUser = await User.deleteById(id)
 		res.json({
 			success: true,
 			message: 'Deleted users',

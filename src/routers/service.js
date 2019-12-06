@@ -21,6 +21,27 @@ router.get('/', async(req, res) => {
 	}
 })
 
+router.get('/category/:category', async(req, res) => {
+	try {
+		const {category} = req.params
+		console.log('llega a get/category', category)
+		const byCategory = await Service.getByNameCategory(category)
+			res.json({
+			success: true,
+			message: `Services found`,
+			data: {
+				service: byCategory
+			}
+		})
+	} catch (error) {
+		res.json({
+			success: false,
+			message: 'Error al traer los servicios por categorias',
+			error: error.message
+		})
+	}
+})
+
 router.get('/:id', async(req, res) => {
 	try {
 		const {id} = req.params
@@ -40,6 +61,9 @@ router.get('/:id', async(req, res) => {
 		})
 	}
 })
+
+
+
 
 router.post('/', async(req, res) => {
 	try {
@@ -84,9 +108,8 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deleteService = await Service.findByIdAndUpdate(id,
-			{isActive: false, updateDate: Date.now()})
-
+		const deleteService = await Service.deleteById(id)
+	
 		res.json({
 			success: true,
 			message: 'Deleted service',

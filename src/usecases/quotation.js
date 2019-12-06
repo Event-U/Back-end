@@ -1,12 +1,15 @@
 const quotation = require('../models/quotation')
 
-function create({provider, price, description, idNeed, idAwarded}) {
+const quotationStates = require('../constants/quotations-states')
+
+function create({provider, price, description, image, need, status}) {
 	return quotation.create({
 		provider, 
 		price,
 		description, 
-		idNeed,
-		idAwarded 
+		image,
+		need,
+		status 
 	})
 }
 
@@ -16,16 +19,45 @@ function getAll() {
 
 function getById(id) {
 	return quotation.findById(id)
+	.populate({
+		path: 'need',
+		populate: {
+			path: 'event'
+		}
+	})
+	.populate('provider')
 }
 
-function updateById (id, newData) {
+function getByProviderAndStatus(provider, status) {
+	console.log('en getByProvider provider: ', provider, status)
+
+	if (!provider) throw new Error('El proveedor es requerido')
+
+	if (!status) throw new Error('El estado es requerido')
+
+	return quotation.find({ provider, status })
+	.populate({
+		path: 'need',
+		populate: {
+			path: 'event'
+		}
+	})
+  .populate('provider')
+}
+
+function updateById(id, newData) {
 	return quotation.findByIdAndUpdate(id, newData)
 }
 
+function deleteById(id) {
+	return quotation.findByIdAndDelete(id)
+}
 
 module.exports = {
 	create, 
 	getAll,
 	getById,
-	updateById
+	getByProviderAndStatus,
+	updateById,
+	deleteById
 }

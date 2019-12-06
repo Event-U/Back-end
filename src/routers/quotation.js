@@ -23,6 +23,28 @@ router.get('/', async(req, res) => {
 	}
 })
 
+router.get('/filtered/', async(req, res) => {
+	try{
+		const {provider, status} = req.body
+		
+		const byProviderAndStatus = await quotation.getByProviderAndStatus(provider, status)
+
+		res.json({
+			success: true,
+			message: 'Todas  las cotizaciones del proveedor',
+			data: {
+				quotation: byProviderAndStatus
+			}
+		})
+	} catch (error) {
+		res.json({
+			succes: false,
+			message: 'Something went wrong',
+			error: error.message
+		})
+	}
+})
+
 router.get('/:id', async(req, res) => {
 	try {
 		console.log(req.params)
@@ -89,12 +111,12 @@ router.patch('/:id', async (req, res) => {
 router.delete('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		const deletequotation = await quotation.deleteById(id)
+		const deleteQuotation = await quotation.deleteById(id)
 		res.json({
 			succes: true,
 			message: 'Deleted quotation',
 			data: {
-				quotation: deletequotation
+				quotation: deleteQuotation
 			}
 		})
 	} catch (error) {

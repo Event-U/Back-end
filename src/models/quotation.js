@@ -14,13 +14,18 @@ const quotationSchema = mongoose.Schema ({
 		maxlength: 200,
 		required: true
 	},
-	idNeed: [{
+	image: {
+		type: String,
+		required: false
+	},
+		need: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Need'
 	}],
-	idAwarded: {
-		type: Boolean,
-		default: false
+	status: {
+		type: Number,
+		required: true,
+		default: 1
 	}
 
 })		

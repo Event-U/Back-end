@@ -9,9 +9,7 @@ const serviceSchema = mongoose.Schema({
 	},
 	description: {
 		type: String,
-		minlength: 10,
-		maxlength: 200,
-		required: true
+		maxlength: 200
 	},
 	measurementUnit: {
 		type: String,
@@ -28,26 +26,11 @@ const serviceSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	catService: {
+	category: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'catServices'
+			ref: 'category'
 		}]
-	},
-	createDate: {
-		type: Date,
-		required: true,
-		default: Date.now()
-	},
-	updateDate: {
-		type: Date,
-		required: true,
-		default: Date.now()
-	},
-	isActive: {
-		type: Boolean,
-		required: true,
-		default: true
 	}
 })
 

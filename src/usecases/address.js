@@ -1,6 +1,6 @@
 const Address = require('../models/address')
 
-function create({street, numberExt, numberInt, place, town, state, CP, isFiscal, isPhisical, users, createDate, updateDate, isActive }) {
+function create({street, numberExt, numberInt, place, town, state, CP, isFiscal, isPhisical, users }) {
 	return Address.create({
 		street, 
 		numberExt, 
@@ -11,10 +11,7 @@ function create({street, numberExt, numberInt, place, town, state, CP, isFiscal,
 		CP, 
 		isFiscal, 
 		isPhisical, 
-		users, 
-		createDate, 
-		updateDate, 
-		isActive
+		users
 	})
 }
 
@@ -31,7 +28,7 @@ function updateById (id, newData) {
 }
 
 function deleteById(id) {
-	return Address.findByIdAndUpdate(id, { updateDate: now, isActive: false })
+	return Address.findByIdAndDelete(id)
 }
 
 module.exports = {

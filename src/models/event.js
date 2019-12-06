@@ -35,25 +35,6 @@ const eventSchema = new mongoose.Schema ({
 			ref: 'Investment'
 		}]
 	},
-	isPay: {
-		type: Boolean,
-		default: false
-	},
-	createDate: {
-		type: Date,
-		default: Date.now(),
-		required: true
-	},
-	updateDate: {
-		type: Date,
-		default: Date.now(),
-		required: true
-	},
-	isActive: {
-		type: Boolean,
-		required: true,
-		default: true
-	},
 	needs: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Need'
