@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   }],
   services: {
     type: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'service'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'service'
     }]
   },
   isActiveNotification: {

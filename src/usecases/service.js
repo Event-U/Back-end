@@ -26,7 +26,7 @@ async function getByNameCategory(category) {
 	const services = await Service.find().populate('category')
 	 
 	const serviceFilter = services.filter(service => {
-		return service.category.name.toLowerCase().includes(category)
+	 	return service.category.name.toLowerCase().includes(category)
 	})
 
 	if(!serviceFilter.length) throw new Error('No se encontro la categoria de este servicio')

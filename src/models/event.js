@@ -15,11 +15,9 @@ const eventSchema = new mongoose.Schema ({
 		type: Date,
 		required: true
 	},
-	addresses: {
-		type: [{
+	address: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Address'
-		}]
 	},
 	image: {
 		type: String,

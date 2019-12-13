@@ -22,12 +22,12 @@ function getAll() {
 }
 
 function getById(id) {
+	console.log("llega por getById ", id)
 	return User.findById(id)
-	.populate('services')
+	.populate('service')
 }
 
 async function getLogin(email, password) {
-	console.log('llega por getLogin con ')
 	const userFound = await User.findOne({email})
 	if(!userFound) throw new Error('No se encontro un usuario con este email')
 
@@ -41,13 +41,13 @@ async function getLogin(email, password) {
 }
 
 function getByIdAndServices(id) {
+	console.log('llega por getByIdAndServices')
 	return User.findById(id)
 	.populate('services')
 }
 
 function updateById (id, newData) {
 	return User.findOneAndUpdate(id, newData)
-
 }
 
 function deleteById(id) {

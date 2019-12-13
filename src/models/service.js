@@ -27,10 +27,8 @@ const serviceSchema = mongoose.Schema({
 		required: true
 	},
 	category: {
-		type: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'category'
-		}]
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'category'
 	}
 })
 
