@@ -26,7 +26,4 @@ const needSchema = mongoose.Schema ({
 	}
 })
 
-
-
-
 module.exports = mongoose.model('Need', needSchema)

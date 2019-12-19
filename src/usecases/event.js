@@ -19,28 +19,21 @@ function getAll() {
 }
 
 function getById(id) {
+	console.log('debe traer el evento con necesidades y cotizaciones')
 	return event.findById(id)
-	.populate('need')
-}
-
-function getByOrganizator(organizator) {
-	return event.findOne(organizator)
-	.populate('need')
-}
-
-///// probar esto es postman y hacer asi las peticiones que requiera
-function getByIds(id) {
-	return event.findById(id)
-	.pupulate({ 
-		path: 'needs',
+	.populate({ 
+		path: 'Need',
 		populate:{
-			path: 'quotes'
+			path: 'quotation'
 		}
 	})
 }
 
-
-
+function getByOrganizator(organizator) {
+	console.log('Usecase getByOrganizator ', organizator)
+	return event.find ({ organizator })
+	.populate('Need')
+}
 
 function updateById(id, newData) {
 	return event.findByIdAndUpdate(id, newData)

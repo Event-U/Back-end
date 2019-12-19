@@ -18,6 +18,7 @@ async function create({typeUser, services, isActiveNotification, bussinesName, r
 }
 
 function getAll() {
+console.log('llega por getAll')
 	return User.find().select({password: false})
 }
 
@@ -25,6 +26,7 @@ function getById(id) {
 	console.log("llega por getById ", id)
 	return User.findById(id)
 	.populate('service')
+	.populate('category')
 }
 
 async function getLogin(email, password) {
@@ -40,14 +42,9 @@ async function getLogin(email, password) {
 	}
 }
 
-function getByIdAndServices(id) {
-	console.log('llega por getByIdAndServices')
-	return User.findById(id)
-	.populate('services')
-}
-
-function updateById (id, newData) {
-	return User.findOneAndUpdate(id, newData)
+function updateById  (id, newData) {
+	console.log('Acualiza user por updateById')
+	return User.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
@@ -59,7 +56,6 @@ module.exports = {
 	getAll,
 	getById,
 	getLogin,
-	getByIdAndServices,
 	deleteById,
 	updateById
 }

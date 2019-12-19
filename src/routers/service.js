@@ -62,9 +62,6 @@ router.get('/:id', async(req, res) => {
 	}
 })
 
-
-
-
 router.post('/', async(req, res) => {
 	try {
 		const data = req.body
@@ -88,7 +85,7 @@ router.patch('/:id', async (req, res) => {
 		const { id } = req.params
 		const body = req.body
 		const serviceUpdate = await Service.updateById(id, body)
-
+    console.log('llega con id: ', id)
 		res.json ({
 			success: true,
 			message: `Service ${id} update`,

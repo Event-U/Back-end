@@ -24,9 +24,9 @@ const eventSchema = new mongoose.Schema ({
 		required: false
 	},
 	organizator: {
-		type: String,
-		required: true
-	},
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+},
 	investments: {
 		type: [{
 			type: mongoose.Schema.Types.ObjectId,

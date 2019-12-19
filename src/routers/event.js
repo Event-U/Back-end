@@ -22,10 +22,30 @@ router.get('/', async(req, res) => {
 	}
 })
 
+router.get('/byOrganizator/', async(req, res) => {
+	try {
+		const {organizator} = req.body
+		const eventsFound = await event.getByOrganizator(organizator)
+		res.json({
+			success: true,
+			message: 'Eventos por organizador',
+			data: {
+			  event: eventsFound
+			}
+		})
+	}catch (error) {
+		res.json({
+			success: false,
+			message: 'Problemas al recuperar los eventos por organizador',
+			error: error.message
+		})
+	}
+})
+
 router.get('/:id', async(req, res) => {
 	try {
 		const { id } = req.params
-		console.log('llego este id ', id)
+		console.log('llego por id ', id)
 		const eventFound = await event.getById(id)
 		res.json({
 			success: true,
@@ -42,6 +62,8 @@ router.get('/:id', async(req, res) => {
 		})
 	}
 })
+
+
 
 router.post('/', async(req, res) => {
 	try {
