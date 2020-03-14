@@ -25,8 +25,8 @@ console.log('llega por getAll')
 function getById(id) {
 	console.log("llega por getById ", id)
 	return User.findById(id)
-	.populate('service')
-	.populate('category')
+	.populate('addresses')
+	.populate('services')
 }
 
 async function getLogin(email, password) {

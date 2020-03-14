@@ -110,7 +110,7 @@ router.delete('/:id', async(req, res) => {
 		const deleteUser = await User.deleteById(id)
 		res.json({
 			success: true,
-			message: 'Deleted users',
+			message: 'User borrado ',
 			data: {
 				user: deleteUser
 			}
@@ -118,7 +118,7 @@ router.delete('/:id', async(req, res) => {
 	} catch (error) {
 		res.json({
 			success: false,
-			message: 'Something went wrong',
+			message: 'Error al borrar user',
 			error: error.message
 		})
 	}

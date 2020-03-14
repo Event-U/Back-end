@@ -35,6 +35,7 @@ function getByProviderAndStatus(provider, status) {
 
 	if (!status) throw new Error('El estado es requerido')
 
+	/*
 	return quotation.find({ provider, status })
 	.populate({
 		path: 'need',
@@ -42,7 +43,12 @@ function getByProviderAndStatus(provider, status) {
 			path: 'event'
 		}
 	})
-  .populate('provider')
+	*/
+	console.log('llega con este proveerdor  ', provider, " status ", status )
+	return quotation.find({ provider, status })
+	
+	
+	
 }
 
 function updateById(id, newData) {

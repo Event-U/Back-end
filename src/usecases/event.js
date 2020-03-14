@@ -22,7 +22,7 @@ function getById(id) {
 	console.log('debe traer el evento con necesidades y cotizaciones')
 	return event.findById(id)
 	.populate({ 
-		path: 'Need',
+		path: 'needs',
 		populate:{
 			path: 'quotation'
 		}

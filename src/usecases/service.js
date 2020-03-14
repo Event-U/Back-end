@@ -16,7 +16,7 @@ function getAll() {
 }
 
 function getById(id) {
-	return Service.findById(id)
+	return Service.findById(id).populate('category')
 }
 
 async function getByNameCategory(category) {

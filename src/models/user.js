@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
   addresses: {
     type: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'address'
+        ref: 'Address'
     }]
   }
 })
