@@ -7,7 +7,7 @@ router.get('/', async(req, res) => {
 		const allUsers = await User.getAll()
 		res.json({
 			success: true,
-			message: 'All Users',
+			message: 'All Users with populate address and services',
 			data: {
 				user: allUsers
 			}
