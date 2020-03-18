@@ -9,7 +9,7 @@ const needSchema = mongoose.Schema({
     },
     service: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'services',
+        ref: 'service',
         required: true
     },
     quotation: {
