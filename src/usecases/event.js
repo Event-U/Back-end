@@ -16,6 +16,12 @@ function create({name, description, date, addresses, image, organizator, investm
 
 function getAll() {
 	return event.find()
+	.populate({ 
+		path: 'needs',
+		populate:{
+			path: 'quotation'
+		}
+	})
 }
 
 function getById(id) {

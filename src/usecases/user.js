@@ -20,11 +20,13 @@ async function create({typeUser, services, isActiveNotification, bussinesName, r
 function getAll() {
 console.log('llega por getAll')
 	return User.find().select({password: false})
+	.populate('addresses')
+	.populate('services')
 }
 
 function getById(id) {
 	console.log("llega por getById ", id)
-	return User.findById(id)
+return User.findById(id)
 	.populate('addresses')
 	.populate('services')
 }
