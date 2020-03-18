@@ -98,7 +98,7 @@ router.patch('/:id', async(req, res) => {
             success: true,
             message: 'Event ${id} update',
             data: {
-                event: eventUpdate,
+                event: eventUpdate
             }
         })
     } catch (error) {
