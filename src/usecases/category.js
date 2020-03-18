@@ -1,39 +1,41 @@
 const category = require('../models/category')
 
-function create({name, description}) {
-	return category.create({
-		name, 
-		description 
-	})
+function create({ name, description }) {
+    return category.create({
+        name,
+        description
+    })
 }
 
 function getAll() {
-	return category.find()
+    return category.find()
+        .populate('services')
 }
 
 function getById(id) {
-	return category.findById(id)
+    return category.findById(id)
+        .populate('services')
 }
 
 function getByIdAndServices(id) {
-	return category.findById(id)
-	.populate('services')
+    return category.findById(id)
+        .populate('services')
 }
 
 
-function updateById (id, newData) {
-	return category.findByIdAndUpdate(id, newData)
+function updateById(id, newData) {
+    return category.findByIdAndUpdate(id, newData)
 }
 
 function deleteById(id) {
-	return category.findByIdAndDelete(id)
+    return category.findByIdAndDelete(id)
 }
 
 module.exports = {
-	create,
-	getAll,
-	getById,
-	getByIdAndServices,
-	updateById,
-	deleteById
+    create,
+    getAll,
+    getById,
+    getByIdAndServices,
+    updateById,
+    deleteById
 }
