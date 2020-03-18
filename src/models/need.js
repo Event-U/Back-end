@@ -10,7 +10,7 @@ const needSchema = mongoose.Schema({
     service: {
         type: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'service',
+            ref: 'services',
             required: true
         }
     },
