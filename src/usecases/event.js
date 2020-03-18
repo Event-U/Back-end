@@ -44,7 +44,7 @@ function getByOrganizator(organizator) {
 function updateById(id, newData) {
     const eventObject = event.findById(id)
     const needsarray = eventObject.needs
-    needsarray.push(newData)
+    needsarray.push(newData.need)
     return event.findByIdAndUpdate(id, {
         needs: needsarray
     })
