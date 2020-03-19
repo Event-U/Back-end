@@ -30,7 +30,10 @@ function getById(id) {
         .populate({
             path: 'needs',
             populate: {
-                path: 'quotation'
+                path: 'quotation',
+                populate: {
+                    path: 'provider'
+                }
             }
         })
 }
