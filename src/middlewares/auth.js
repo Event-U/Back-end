@@ -1,23 +1,22 @@
-// Importamos el jwt 
-// const jwt = requre('../lib/jwt')
+/*
+const  jwt  =  require ( '../lib/jwt' )
 
+ función  asíncrona auth  ( solicitud ,  respuesta ,  siguiente )  {
+  prueba  {
+    const  {  autorización : token  }  =  solicitud . encabezados
 
+    const  isTokenValid  =  esperar  jwt . verificar ( token )
+    if  ( ! isTokenValid )  arroja un  nuevo  error ( 'No autorizado' )
+    siguiente ( )
+  }  captura  ( error )  {
+    respuesta . estado ( 401 )
+    respuesta . json ( {
+      el éxito : falso ,
+      mensaje : 'Token inválido' ,
+      de error : error . mensaje
+    } )
+  }
+}
 
-// function auth(req, res, next) {
-//     // Deconstruimos el valor de token dentro de Authorization
-//     const { Authorization: token } = req.headers
-//     const isTokenValid = await jwt.verify()
-//         // Verificamos sí el token es válido y sino lanzamos error
-//     if (!isTokenValid) throw new Error('Unauthorized')
-//     next()
-// } catch (error) {
-//     Response.status(401)
-//     Response.json {
-//         success: false,
-//         message: 'invalid token',
-//         status: 401,
-//         error: invalid signature
-//     }
-// }
-
-// module.exports(auth)
+módulo . exportaciones  =  autenticación
+*/
