@@ -18,7 +18,10 @@ function getAll() {
         .populate({
             path: 'need',
             populate: {
-                path: 'service'
+                path: 'service',
+                populate: {
+                    path: 'category'
+                }
             }
         })
         .populate('provider')
