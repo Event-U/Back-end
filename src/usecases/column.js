@@ -1,8 +1,6 @@
 const column = require('../models/column')
 
 function create({name, tasks}) {
-	console.log('entro al create de column')
-
 	return column.create({
 		name, 
 		tasks

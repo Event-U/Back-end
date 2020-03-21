@@ -25,7 +25,6 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		console.log('llega aqui')
 		const boardFound = await board.getById(id)
 		res.json({
 			success: true,
@@ -45,7 +44,6 @@ router.get('/:id', async(req, res) => {
 
 router.post('/', async(req, res) => {
 	try {
-		console.log('llega a post board')
 		const data = req.body
 		console.log(data)
 		const createBoard = await board.create(data)

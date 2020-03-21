@@ -1,22 +1,21 @@
-/*
-const  jwt  =  require ( '../lib/jwt' )
 
- función  asíncrona auth  ( solicitud ,  respuesta ,  siguiente )  {
-  prueba  {
-    const  {  autorización : token  }  =  solicitud . encabezados
+const jwt = require('../lib/jwt')
 
-    const  isTokenValid  =  esperar  jwt . verificar ( token )
-    if  ( ! isTokenValid )  arroja un  nuevo  error ( 'No autorizado' )
-    siguiente ( )
-  }  captura  ( error )  {
-    respuesta . estado ( 401 )
-    respuesta . json ( {
-      el éxito : falso ,
-      mensaje : 'Token inválido' ,
-      de error : error . mensaje
-    } )
+async function auth (request, response, next) {
+  try {
+    const { authorization: token } = request.headers
+
+    const isTokenValid = await jwt.verify(token)
+    if (!isTokenValid) throw new Error('Unauthorized')
+    next()
+  } catch (error) {
+    response.status(401)
+    response.json({
+      success: false,
+      message: 'Invalid Token',
+      error: error.message
+    })
   }
 }
 
-módulo . exportaciones  =  autenticación
-*/
+module.exports = auth

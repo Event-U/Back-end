@@ -1,3 +1,4 @@
+// model column
 const mongoose = require('mongoose')
 
 const columnSchema = new mongoose.Schema({

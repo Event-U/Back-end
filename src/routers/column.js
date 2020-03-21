@@ -25,7 +25,6 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
 	try{
 		const { id } = req.params
-		console.log('llega aqui')
 		const columnFound = await column.getById(id)
 		res.json({
 			success: true,
