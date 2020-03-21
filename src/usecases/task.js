@@ -1,11 +1,11 @@
 
 const task = require('../models/task')
 
-function create({name, description, needs}) {
+function create({name, description, quotation}) {
 	return task.create({
 		name, 
 		description,
-		needs
+		quotation
 	})
 }
 

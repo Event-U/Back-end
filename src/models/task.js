@@ -1,4 +1,3 @@
-// model task
 const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema({
@@ -12,10 +11,10 @@ const taskSchema = new mongoose.Schema({
 		minlength: 3,
 		maxlength: 200
 	},
-	needs: [{
+	quotation: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Need'
-	}]
+		ref: 'quotation'
+	}
 
 })
 
