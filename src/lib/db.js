@@ -10,12 +10,8 @@ const {
 const uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`
 
 module.exports = () => mongoose.connect(uri, {
+  useCreateIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
-
-
-
-
-// Event-U (la colección)
-// Documents: Users

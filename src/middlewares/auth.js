@@ -1,23 +1,21 @@
-// Importamos el jwt 
-// const jwt = requre('../lib/jwt')
 
+const jwt = require('../lib/jwt')
 
+async function auth (request, response, next) {
+  try {
+    const { authorization: token } = request.headers
 
-// function auth(req, res, next) {
-//     // Deconstruimos el valor de token dentro de Authorization
-//     const { Authorization: token } = req.headers
-//     const isTokenValid = await jwt.verify()
-//         // Verificamos sí el token es válido y sino lanzamos error
-//     if (!isTokenValid) throw new Error('Unauthorized')
-//     next()
-// } catch (error) {
-//     Response.status(401)
-//     Response.json {
-//         success: false,
-//         message: 'invalid token',
-//         status: 401,
-//         error: invalid signature
-//     }
-// }
+    const isTokenValid = await jwt.verify(token)
+    if (!isTokenValid) throw new Error('Unauthorized')
+    next()
+  } catch (error) {
+    response.status(401)
+    response.json({
+      success: false,
+      message: 'Invalid Token',
+      error: error.message
+    })
+  }
+}
 
-// module.exports(auth)
+module.exports = auth
