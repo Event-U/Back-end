@@ -3,18 +3,16 @@ const mongoose = require('mongoose')
 
 const columnSchema = new mongoose.Schema({
 
-	name: {
-		type: String,
-		minlength: 1,
-		maxlength: 100
-	},
+    name: {
+        type: String,
+        minlength: 1,
+        maxlength: 100
+    },
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'task'
+    }]
 
-	tasks: {
-		type: [{
-	    type: mongoose.Schema.Types.ObjectId,
-      ref: 'task'
-		}]
-	}
 
 })
 
