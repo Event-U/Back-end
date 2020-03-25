@@ -8,11 +8,11 @@ const columnSchema = new mongoose.Schema({
         minlength: 1,
         maxlength: 100
     },
+
     tasks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'task'
     }]
-
 
 })
 
