@@ -20,9 +20,12 @@ function getAll() {
             path: 'needs',
             populate: {
                 path: 'quotation',
-                populate: {
-                    path: 'service'
-                }
+            }
+        })
+        .populate({
+            path: 'needs',
+            populate: {
+                path: 'service',
             }
         })
 }
