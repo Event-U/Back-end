@@ -26,6 +26,9 @@ function getAll() {
             path: 'needs',
             populate: {
                 path: 'service',
+                populate: {
+                    path: 'category'
+                }
             }
         })
 }
