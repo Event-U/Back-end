@@ -4,7 +4,7 @@ function create({
   name,
   description,
   date,
-  addresses,
+  address,
   image,
   organizator,
   investments,
@@ -14,7 +14,7 @@ function create({
     name,
     description,
     date,
-    addresses,
+    address,
     image,
     organizator,
     investments,
@@ -25,6 +25,7 @@ function create({
 function getAll() {
   return event
     .find()
+    .populate("address")
     .populate({
       path: "needs",
       populate: {

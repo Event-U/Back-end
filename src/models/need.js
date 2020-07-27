@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const needSchema = mongoose.Schema({
   description: {
-    minlength: 5,
     type: String,
+    minlength: 5,
     maxlength: 200,
     required: true,
   },
