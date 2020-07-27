@@ -1,23 +1,25 @@
 // model board
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const boardSchema = new mongoose.Schema({
-	event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'event'
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "event",
   },
-  
-	columns: {
-		type: [{
-	    type: mongoose.Schema.Types.ObjectId,
-      ref: 'column'
-		}]
-	},
 
-	service: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'service'
-  }
-})
+  columns: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "column",
+      },
+    ],
+  },
 
-module.exports = mongoose.model('board', boardSchema)
+  service: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "service",
+  },
+});
+
+module.exports = mongoose.model("board", boardSchema);
